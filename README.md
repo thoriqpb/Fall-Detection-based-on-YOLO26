@@ -1,4 +1,4 @@
-# Fall Detection Logic using YOLO26 Pose Estimation
+# Fall Detection Logic using YOLO Pose Estimation
 
 This project utilizes computer vision to detect human falls in real-time. Instead of relying on simple object classification, this system uses **YOLOv8-Pose / YOLO26n-pose** to extract human skeleton keypoints. By analyzing the spatial relationship and proportions of these keypoints, the system can accurately differentiate between a person standing/sitting and a person who has fallen to the ground.
 
@@ -23,8 +23,12 @@ The aspect ratio alone is insufficient because it might trigger false positives 
 * **Condition:** If $Y_{nose} > \bar{Y}_{hip}$, it mathematically proves that the person's head is physically located *lower* (closer to the floor) than their center of mass (hips).
 
 ### 3. The Boolean Decision & State Holding
-The final decision is a logical `AND` operation of the two conditions above.
+The final decision is determined by a logical conjunction (AND operation) of the two conditions described above. Let $F$ represent the Fall detection state, where $F = 1$ (True) indicates a detected fall and $F = 0$ (False) indicates a safe state.
 
-```python
-# The Core Logic
-current_frame_is_fallen = (ratio < 1.0) and (nose_y > avg_hip_y)
+$$F = (Ratio < 1.0) \land (Y_{nose} > \bar{Y}_{hip})$$
+
+To prevent the system from flickering between $F = 0$ and $F = 1$ due to slight movements or temporary keypoint occlusion after a fall, a **State Holding Mechanism** is implemented. 
+If $F = 1$ is triggered at time $t$, the system forces $F = 1$ for an interval of $[t, t + \Delta t]$ (e.g., $\Delta t = 3.0$ seconds). Even if subsequent frames mathematically evaluate to $F = 0$, the system will maintain the alarm state until the duration expires, ensuring a reliable trigger for emergency notifications.
+
+---
+*This logic serves as the foundational prototype. Future enhancements may include time-series analysis on wrist/ankle keypoints ($\sigma^2$) to differentiate between a conscious fall (movement) and an unconscious fall (no movement).*
