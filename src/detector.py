@@ -14,9 +14,12 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import numpy as np
-from ultralytics import YOLO
 
 import config
+
+# Catatan: `ultralytics`/`torch` di-import secara LAZY di dalam PoseDetector,
+# bukan di level modul. Dengan begitu modul lain (mis. unit test fall_logic)
+# bisa memakai dataclass PersonDetection tanpa harus memuat torch yang berat.
 
 
 @dataclass
@@ -55,8 +58,10 @@ class PoseDetector:
         self.model_name: Optional[str] = None
         self.model = self._load_model()
 
-    def _load_model(self) -> YOLO:
+    def _load_model(self):
         """Coba tiap kandidat bobot; pakai yang pertama berhasil."""
+        from ultralytics import YOLO  # lazy import (memuat torch)
+
         errors = []
         for cand in self.candidates:
             try:

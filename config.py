@@ -64,9 +64,10 @@ TORSO_ANGLE_THRESHOLD = 50.0   # sudut batang tubuh thd vertikal (derajat); > in
                                # 0deg = tegak lurus berdiri, 90deg = tubuh horizontal
 
 # --- Cue temporal "jatuh cepat" (rapid drop) ---
-# Kecepatan turun pusat massa, dinormalisasi tinggi bbox (skala-invarian),
-# dalam satuan (fraksi tinggi tubuh) per detik. Jatuh nyata jauh lebih cepat
-# daripada menunduk/duduk perlahan.
+# Kecepatan turun pusat massa tubuh, dinormalisasi terhadap TINGGI FRAME
+# (skala-invarian thd resolusi), dalam satuan (fraksi tinggi frame) per detik.
+# Jatuh nyata menempuh sebagian besar tinggi frame dengan cepat, jauh lebih
+# cepat daripada menunduk/duduk perlahan.
 VELOCITY_DROP_THRESHOLD = 0.6
 HISTORY_SECONDS = 1.0          # panjang window riwayat posisi untuk hitung kecepatan
 
