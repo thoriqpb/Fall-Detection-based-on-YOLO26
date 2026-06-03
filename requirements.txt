@@ -1,0 +1,13 @@
+# Sistem Deteksi Jatuh Lansia — dependencies
+# Diuji pada Python 3.12. Untuk YOLO26/YOLO11, gunakan ultralytics>=8.3.0.
+# ultralytics 8.2.x hanya mendukung YOLOv8 (cukup sebagai baseline).
+
+ultralytics>=8.2.0
+lapx>=0.5.2             # dependensi ByteTrack (tracking multi-orang)
+opencv-python>=4.9
+numpy>=1.26,<2.0
+matplotlib>=3.8
+scikit-learn>=1.4
+requests>=2.31          # notifikasi Telegram (HTTP Bot API)
+streamlit>=1.36         # dashboard (opsional, fitur P2)
+pandas>=2.1             # baca/olah event log & metrik

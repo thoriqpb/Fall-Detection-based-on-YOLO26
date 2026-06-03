@@ -1,0 +1,38 @@
+# ===== Bobot model (besar, unduh via instruksi README) =====
+models/
+*.pt
+*.onnx
+*.engine
+
+# ===== Dataset & video (besar, unduh terpisah) =====
+data/
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# ===== Output runtime (bukan untuk di-commit) =====
+outputs/
+*.log
+
+# Hasil metrik/plot di results/ TETAP di-commit untuk laporan,
+# jadi results/ TIDAK di-ignore.
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ===== IDE / OS =====
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ===== Rahasia (token Telegram dll) =====
+.env
+secrets.py
