@@ -37,7 +37,9 @@ MODEL_CANDIDATES = [
 CONF_THRESHOLD = 0.5      # ambang confidence deteksi orang
 IOU_THRESHOLD = 0.5       # NMS IoU
 KPT_CONF_THRESHOLD = 0.5  # ambang confidence per-keypoint (pengganti cek '== 0.0')
-DEVICE = None             # None = auto (GPU bila ada). Set 'cpu' / '0' untuk paksa.
+DEVICE = "cpu"            # Paksa CPU — hindari mismatch torchvision::nms CUDA.
+                          # Ganti ke None untuk auto-detect GPU bila torch+torchvision
+                          # sudah diinstall dalam versi CUDA yang kompatibel.
 
 # Tracking (multi-orang) — ByteTrack bawaan ultralytics
 TRACKER_CFG = "bytetrack.yaml"
